@@ -51,4 +51,5 @@ for(let instruction of instructions){
     ship.turn(action,value)
   }
 }
+
 console.log(Math.abs(ship.x)+Math.abs(ship.y))
