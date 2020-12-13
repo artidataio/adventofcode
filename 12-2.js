@@ -56,4 +56,5 @@ for(let instruction of instructions){
     ship.turnWaypoint(action,value)
   }
 }
+
 console.log(Math.abs(ship.x)+Math.abs(ship.y))
