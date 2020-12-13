@@ -1,0 +1,7 @@
+const fs = require('fs')
+const arr = fs.readFileSync('13.txt', 'utf8').split('\n')
+let timestamp = Number(arr[0])
+let buses = arr[1].split(',').filter(x=>x!=='x').map(x=>Number(x))
+let scores = buses.map(x=>x-timestamp%x)
+let indexMin = scores.indexOf(Math.min.apply(null,scores))
+console.log(buses[indexMin]*scores[indexMin])
