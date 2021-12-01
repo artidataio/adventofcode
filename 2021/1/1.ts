@@ -1,13 +1,8 @@
-const fs = require('fs')
-let arr1 = fs.readFileSync('./1.txt', 'utf8').split('\n')
-let arr2 = []
-let passport = []
-for(let elem of arr1){
-  if(elem==''){
-    arr2.push(passport)
-    passport = []
-  } else {
-    passport.push(...elem.split(' '))
-  }
+import fs = require('fs')
+let arr = fs.readFileSync('./1.txt', 'utf8').split('\n')
+console.log(arr)
+let count = 0
+for (let i = 1; i < arr.length; i++) {
+  count += parseInt(arr[i]) > parseInt(arr[i - 1]) ? 1 : 0
 }
-console.log(arr2.map(v=>v.map(w=>w.slice(0,3))))
+console.log(count)
