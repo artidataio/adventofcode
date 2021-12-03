@@ -1,7 +1,6 @@
-import fs = require('fs')
+import { readFileSync } from 'fs'
 
-let arr = fs
-  .readFileSync('./1.txt', 'utf8')
+let arr = readFileSync('./1.txt', 'utf8')
   .split('\n')
   .map((val) => parseInt(val))
 
