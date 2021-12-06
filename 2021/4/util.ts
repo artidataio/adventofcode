@@ -40,7 +40,7 @@ function hasBingo(arr2d: number[][]): boolean {
 // console.log(hasBingo(sample1)) //false
 // console.log(hasBingo(sample2)) //true
 
-function locateNewNum(arr2d: number[][], num: number): number[] {
+function locateNum(arr2d: number[][], num: number): number[] {
   for (let i = 0; i < 5; i++) {
     const ind = arr2d[i].indexOf(num)
     if (ind >= 0) {
@@ -59,11 +59,15 @@ function locateNewNum(arr2d: number[][], num: number): number[] {
 //   [1, 12, 20, 15, 19],
 // ]
 
-// console.log(locateNewNum(sample, 20)) //[4,2]
+// console.log(locateNum(sample, 20)) //[4,2]
 
-function buildNewBoard(arr2d: number[][], ind: number[]): number[][] {
+function updateBoard(arr2d: number[][], ind: number[]): number[][] {
   arr2d[ind[0]][ind[1]] = 1
-  return arr2d
+  return [
+    ...arr2d.slice(0, ind[0]),
+    [...arr2d[ind[0]].slice(0, ind[1]), 1, ...arr2d[ind[0]].slice(ind[1] + 1)],
+    ...arr2d.slice(ind[0] + 1),
+  ]
 }
 
 // // Test cases
@@ -75,7 +79,7 @@ function buildNewBoard(arr2d: number[][], ind: number[]): number[][] {
 //   [0, 0, 0, 0, 1],
 // ]
 
-// console.log(buildNewBoard(sample, [0, 4]))
+// console.log(updateBoard(sample, [1, 3]))
 // // [
 // //   [ 0, 0, 0, 0, 1 ],
 // //   [ 0, 0, 0, 0, 1 ],
@@ -131,8 +135,8 @@ function computeSum(arr2d1: number[][], arr2d2: number[][]): number {
 module.exports = {
   isBingo,
   hasBingo,
-  locateNewNum,
-  buildNewBoard,
+  locateNum,
+  updateBoard,
   generateBoard,
   computeSum,
 }

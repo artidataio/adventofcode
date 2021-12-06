@@ -2,8 +2,8 @@ import { readFileSync } from 'fs'
 const {
   isBingo,
   hasBingo,
-  locateNewNum,
-  buildNewBoard,
+  locateNum,
+  updateBoard,
   generateBoard,
   computeSum,
 } = require('./util')
@@ -31,11 +31,11 @@ const bingos = new Array(boards.length).fill([]).map((val) => generateBoard())
 
 outer: for (let i = 0; i < sequence.length; i++) {
   for (let j = 0; j < boards.length; j++) {
-    const locateIJ = locateNewNum(boards[j], sequence[i])
+    const locateIJ = locateNum(boards[j], sequence[i])
     if (locateIJ[0] >= 0 && locateIJ[1] >= 0) {
-      const boardNew = buildNewBoard(bingos[j], locateIJ)
+      const boardNew = updateBoard(bingos[j], locateIJ)
       if (hasBingo(boardNew)) {
-        console.log(computeSum(boards[j], bingos[j]) * sequence[i])
+        console.log(computeSum(boards[j], boardNew) * sequence[i])
         break outer
       }
       bingos[j] = boardNew
