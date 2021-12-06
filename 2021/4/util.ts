@@ -61,7 +61,7 @@ function locateNum(arr2d: number[][], num: number): number[] {
 
 // console.log(locateNum(sample, 20)) //[4,2]
 
-function updateBoard(arr2d: number[][], ind: number[]): number[][] {
+function updateMark(arr2d: number[][], ind: number[]): number[][] {
   arr2d[ind[0]][ind[1]] = 1
   return [
     ...arr2d.slice(0, ind[0]),
@@ -79,7 +79,7 @@ function updateBoard(arr2d: number[][], ind: number[]): number[][] {
 //   [0, 0, 0, 0, 1],
 // ]
 
-// console.log(updateBoard(sample, [1, 3]))
+// console.log(updateMark(sample, [1, 3]))
 // // [
 // //   [ 0, 0, 0, 0, 1 ],
 // //   [ 0, 0, 0, 0, 1 ],
@@ -88,12 +88,12 @@ function updateBoard(arr2d: number[][], ind: number[]): number[][] {
 // //   [ 0, 0, 0, 0, 1 ]
 // // ]
 
-function generateBoard(): number[][] {
+function generateMark(): number[][] {
   return new Array(5).fill([]).map((val) => new Array(5).fill(0))
 }
 
 // // Test cases
-// console.log(generateBoard())
+// console.log(generateMark())
 // // [
 // //   [ 0, 0, 0, 0, 0 ],
 // //   [ 0, 0, 0, 0, 0 ],
@@ -136,7 +136,7 @@ module.exports = {
   isBingo,
   hasBingo,
   locateNum,
-  updateBoard,
-  generateBoard,
+  updateMark,
+  generateMark,
   computeSum,
 }

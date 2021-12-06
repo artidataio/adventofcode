@@ -3,8 +3,8 @@ const {
   isBingo,
   hasBingo,
   locateNum,
-  updateBoard,
-  generateBoard,
+  updateMark,
+  generateMark,
   computeSum,
 } = require('./util')
 const arr = readFileSync('./1.txt', 'utf8').split('\n')
@@ -27,18 +27,18 @@ arr.slice(1).forEach((val, ind) => {
   }
 })
 
-const bingos = new Array(boards.length).fill([]).map((val) => generateBoard())
+const marks = new Array(boards.length).fill([]).map((val) => generateMark())
 
 outer: for (let i = 0; i < sequence.length; i++) {
   for (let j = 0; j < boards.length; j++) {
     const locateIJ = locateNum(boards[j], sequence[i])
     if (locateIJ[0] >= 0 && locateIJ[1] >= 0) {
-      const boardNew = updateBoard(bingos[j], locateIJ)
-      if (hasBingo(boardNew)) {
-        console.log(computeSum(boards[j], boardNew) * sequence[i])
+      const markNew = updateMark(marks[j], locateIJ)
+      if (hasBingo(markNew)) {
+        console.log(computeSum(boards[j], markNew) * sequence[i])
         break outer
       }
-      bingos[j] = boardNew
+      marks[j] = markNew
     }
   }
 }
