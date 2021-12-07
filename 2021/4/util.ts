@@ -62,7 +62,6 @@ function locateNum(arr2d: number[][], num: number): number[] {
 // console.log(locateNum(sample, 20)) //[4,2]
 
 function updateMark(arr2d: number[][], ind: number[]): number[][] {
-  arr2d[ind[0]][ind[1]] = 1
   return [
     ...arr2d.slice(0, ind[0]),
     [...arr2d[ind[0]].slice(0, ind[1]), 1, ...arr2d[ind[0]].slice(ind[1] + 1)],
