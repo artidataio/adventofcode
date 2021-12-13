@@ -19,7 +19,7 @@ ts-node 1.ts
 Starting competitively on day 13 onwards, trying to do once in three days.
 Here's my stats:
 
-|Day|Part1 Time|   Rank|  Score|Part2 Time|   Rank|  Score|
+|Day|Part1-Time|   Rank|  Score|Part2-Time|   Rank|  Score|
 |---|----------|-------|-------|----------|-------|-------|
 | 13|  00:48:59|   5416|      0|  01:22:40|   6669|      0|
 |  9|  06:41:44|  28638|      0|  21:25:27|  38402|      0|
