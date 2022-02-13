@@ -1,0 +1,14 @@
+{
+  "name": "2021",
+  "version": "1.0.0",
+  "description": "Using TypeScript to solve https://adventofcode.com/2021/ puzzles.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^17.0.17"
+  }
+}
