@@ -21,6 +21,8 @@ npm install
 npx ts-node 1/1.ts
 ```
 
+Here's my stats:
+
 | Day | Part1-Time | Rank   | Score | Part2-Time | Rank   | Score |
 | --- | ---------- | ------ | ----- | ---------- | ------ | ----- |
 | 2   | 12:16:37   | 91557  | 0     | 13:03:31   | 88117  | 0     |
