@@ -1,5 +1,6 @@
 import { readFileSync } from "fs";
 let arr = readFileSync("1/1.txt", "utf8").split(/\r?\n/);
+arr.push("");
 
 let current = 0;
 let max = 0;
@@ -13,9 +14,6 @@ for (let i = 0; i < arr.length; i++) {
     current += parseInt(arr[i]);
   }
 }
-//corner case
-if (current > max) {
-  max = current;
-}
 
 console.log(max);
+//66487
