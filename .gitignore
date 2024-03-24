@@ -1,2 +1,7 @@
 #exclude node_modules
 2022/node_modules
+/.idea/.gitignore
+/.idea/adventofcode.iml
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/vcs.xml
