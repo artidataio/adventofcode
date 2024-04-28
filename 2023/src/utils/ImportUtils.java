@@ -53,4 +53,28 @@ public class ImportUtils {
 
         return linesArray;
     }
+
+    public static char[][] readCharTable(final String filePath) {
+        final List<char[]> linesList = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                char[] chars = new char[line.length()];
+                for (int i = 0; i < line.length(); i++) {
+                    chars[i] = line.charAt(i);
+                }
+                linesList.add(chars);
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
+        // Convert the list to a 2D String array
+        char[][] linesArray = new char[linesList.size()][];
+        linesList.toArray(linesArray);
+
+        return linesArray;
+    }
 }
