@@ -1,76 +1,91 @@
 package Day01;
 
 import java.nio.file.Path;
-import java.util.List;
+import java.util.*;
 
 import utils.ImportUtils;
 
 public class Part2 {
 
-    static String replaceToNumbers(String s) {
+    final static Map<Integer, String> numbers =
+            Map.of(
+                    0, "zero",
+                    1, "one",
+                    2, "two",
+                    3, "three",
+                    4, "four",
+                    5, "five",
+                    6, "six",
+                    7, "seven",
+                    8, "eight",
+                    9, "nine"
+            );
 
-        String[] numbers = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
-        int first = -1;
-        int indexFirst = Integer.MAX_VALUE;
-        for (int i = 0; i <= 9; i++) {
-            int indexTemp = s.indexOf(numbers[i]);
-            if (indexTemp >= 0 && indexTemp < indexFirst) {
-                first = i;
-                indexFirst = indexTemp;
+    static int indexMin(int[] array) {
+        int index = -1;
+        int min = Integer.MAX_VALUE;
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] == -1) continue;
+            if (array[i] < min) {
+                index = i;
+                min = array[i];
             }
         }
-        if (indexFirst != Integer.MAX_VALUE) {
-            s = s.substring(0, indexFirst) + first
-                    + s.substring(indexFirst);
-            s = s.replaceFirst(numbers[first], "");
-        }
+        return index;
+    }
 
-        int last = -1;
-        int indexLast = Integer.MIN_VALUE;
-        for (int i = 0; i <= 9; i++) {
-            int indexTemp = s.lastIndexOf(numbers[i]);
-            if (indexTemp >= 0 && indexTemp > indexLast) {
-                last = i;
-                indexLast = indexTemp;
+    static int indexMax(int[] array) {
+        int index = -1;
+        int max = Integer.MIN_VALUE;
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] == -1) continue;
+            if (array[i] > max) {
+                index = i;
+                max = array[i];
             }
         }
-        if (indexLast != Integer.MIN_VALUE) {
-            s = s.substring(0, indexLast) + last
-                    + s.substring(indexLast);
-        }
-
-        return s;
+        return index;
     }
-
-    static String removeLetters(String s) {
-        return s.replaceAll("[a-z]", "");
-    }
-
-    static String enforce2Digits(String s) {
-        if (s.length() > 2) {
-            return String.valueOf(s.charAt(0)) +
-                    s.charAt(s.length() - 1);
-        }
-        if (s.length() < 2) {
-            return s + s;
-        } else {
-            return s;
-        }
+    public static String replaceLast(String text, String regex, String replacement) {
+        return text.replaceFirst("(?s)"+regex+"(?!.*?"+regex+")", replacement);
     }
 
     public static void main(String[] args) {
 
-        String filePath = Path.of("asset/day-01/sample.txt").toString();
+        String filePath = Path.of("asset/day-01/input.txt").toString();
         List<String> input = ImportUtils.readAsList(filePath);
 
+        int count = 0;
 
-        int out = input
-                .stream()
-                .map(item -> Integer.parseInt(enforce2Digits(removeLetters(replaceToNumbers(item)))))
-                .mapToInt(Integer::intValue)
-                .sum();
+        for (String elem : input) {
 
-        System.out.println(out);
+            //Replace the first located numbers
+            int[] firstIndex = new int[10];
+            for (Map.Entry<Integer, String> entry : numbers.entrySet()) {
+                firstIndex[entry.getKey()] = elem.indexOf(entry.getValue());
+            }
+            int min = indexMin(firstIndex);
+            if (min != -1) {
+                elem = elem.replaceFirst(numbers.get(min), String.valueOf(min));
+            }
+
+            //Replace the last located numbers
+            int[] lastIndex = new int[10];
+            for (Map.Entry<Integer, String> entry : numbers.entrySet()) {
+                lastIndex[entry.getKey()] = elem.lastIndexOf(entry.getValue());
+            }
+            int max = indexMax(lastIndex);
+            if (max != -1) {
+                elem = replaceLast(elem,numbers.get(max), String.valueOf(max));
+            }
+
+            // Summing to count
+            String digits = elem.replaceAll("[a-z]", "");
+            count += Integer.parseInt("" + digits.charAt(0) + digits.charAt(digits.length() - 1));
+
+        }
+
+        System.out.println(count);
 
     }
 }
