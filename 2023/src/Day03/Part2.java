@@ -5,7 +5,7 @@ import utils.ImportUtils;
 import java.nio.file.Path;
 import java.util.*;
 
-import static Day03.Helper.coordsCheck;
+import static Day03.Utils.coordsCheck;
 
 record Info(int value, int id) {
 }

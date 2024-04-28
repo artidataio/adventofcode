@@ -5,7 +5,7 @@ import utils.ImportUtils;
 import java.nio.file.Path;
 import java.util.List;
 
-import static Day03.Helper.coordsCheck;
+import static Day03.Utils.coordsCheck;
 
 public class Part1 {
 

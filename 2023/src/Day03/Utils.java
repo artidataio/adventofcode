@@ -3,7 +3,7 @@ package Day03;
 import java.util.ArrayList;
 import java.util.List;
 
-public interface Helper {
+public interface Utils {
 
     static List<Coord> coordsCheck(int y, int xStart, int xEnd, int boxWidth, int boxHeight) {
         List<Coord> out = new ArrayList<>();
