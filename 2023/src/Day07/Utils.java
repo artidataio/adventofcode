@@ -19,6 +19,21 @@ public interface Utils {
             Map.entry('3', 3),
             Map.entry('2', 2));
 
+    Map<Character, Integer> scoresCardJoker = Map.ofEntries(
+            Map.entry('A', 14),
+            Map.entry('K', 13),
+            Map.entry('Q', 12),
+            Map.entry('T', 10),
+            Map.entry('9', 9),
+            Map.entry('8', 8),
+            Map.entry('7', 7),
+            Map.entry('6', 6),
+            Map.entry('5', 5),
+            Map.entry('4', 4),
+            Map.entry('3', 3),
+            Map.entry('2', 2),
+            Map.entry('J', 1));
+
     Map<String, Integer> scoresCombo = Map.of(
             "FIVE KIND", 6,
             "FOUR KIND", 5,
@@ -29,22 +44,34 @@ public interface Utils {
             "HIGH CARD", 0
     );
 
+
     static boolean isHigherCard(char handCard, char baseCard) {
-        return scoresCard.get(handCard) > scoresCard.get(baseCard);
+        return isHigherCard(handCard, baseCard, false);
     }
 
-    static boolean isEqualCard(char handCard, char baseCard) {
-        return Objects.equals(scoresCard.get(handCard), scoresCard.get(baseCard));
+    static boolean isHigherCard(char handCard, char baseCard, boolean joker) {
+        Map<Character, Integer> temp = joker ? scoresCardJoker : scoresCard;
+        return temp.get(handCard) > temp.get(baseCard);
     }
+
+    static boolean isEqualCard(char handCard, char baseCard, boolean joker) {
+        Map<Character, Integer> temp = joker ? scoresCardJoker : scoresCard;
+        return Objects.equals(temp.get(handCard), temp.get(baseCard));
+    }
+
 
     // This method doesn't consider scoreCombo
     static boolean isHigherCards(String handCards, String baseCards) {
+        return isHigherCards(handCards, baseCards, false);
+    }
+
+    static boolean isHigherCards(String handCards, String baseCards, boolean joker) {
         for (int i = 0; i < handCards.length(); i++) {
             char currHand = handCards.charAt(i);
             char currBase = baseCards.charAt(i);
-            if (isHigherCard(currHand, currBase)) {
+            if (isHigherCard(currHand, currBase, joker)) {
                 return true;
-            } else if (!isEqualCard(currHand, currBase)) {
+            } else if (!isEqualCard(currHand, currBase, joker)) {
                 return false;
             }
         }
@@ -53,15 +80,28 @@ public interface Utils {
 
 
     static int getScoreCombo(String card) {
+        return getScoreCombo(card, false);
+    }
+
+    static int getScoreCombo(String card, boolean joker) {
         Map<Character, Integer> countMap = new HashMap<>();
         for (int i = 0; i < 5; i++) {
             char curr = card.charAt(i);
             countMap.put(curr, countMap.getOrDefault(curr, 0) + 1);
         }
 
+        int countJ = 0;
+        if (joker && (countMap.containsKey('J') && countMap.keySet().size() != 1)) {
+            countJ = countMap.remove('J');
+        }
+
         List<Integer> repeats = new ArrayList<>(countMap.values());
         Collections.sort(repeats);
         Collections.reverse(repeats);
+
+        if (joker && countJ != 0) {
+            repeats.set(0, repeats.getFirst() + countJ);
+        }
 
         int out;
         if (repeats.get(0) == 1) {
