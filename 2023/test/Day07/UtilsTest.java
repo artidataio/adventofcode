@@ -19,16 +19,16 @@ class UtilsTest {
     }
 
     @Test
-    void isHigherCardsTest() {
-        assertTrue(isHigherCards("QQQJA","T55J5"));
-        assertTrue(isHigherCards("KK677","KTJJT"));
-        assertTrue(isHigherCards("33332","2AAAA"));
-        assertTrue(isHigherCards("77888","77788"));
-        assertTrue(isHigherCards("QQQJA","T55J5",true));
-        assertTrue(isHigherCards("KK677","KTJJT", true));
-        assertTrue(isHigherCards("33332","2AAAA",true));
-        assertTrue(isHigherCards("77888","77788",true));
-        assertTrue(isHigherCards("QQQQ2","JKKK2",true));
+    void areHigherCardsTest() {
+        assertTrue(areHigherCards("QQQJA","T55J5"));
+        assertTrue(areHigherCards("KK677","KTJJT"));
+        assertTrue(areHigherCards("33332","2AAAA"));
+        assertTrue(areHigherCards("77888","77788"));
+        assertTrue(areHigherCards("QQQJA","T55J5",true));
+        assertTrue(areHigherCards("KK677","KTJJT", true));
+        assertTrue(areHigherCards("33332","2AAAA",true));
+        assertTrue(areHigherCards("77888","77788",true));
+        assertTrue(areHigherCards("QQQQ2","JKKK2",true));
     }
 
     @Test

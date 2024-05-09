@@ -61,11 +61,11 @@ public interface Utils {
 
 
     // This method doesn't consider scoreCombo
-    static boolean isHigherCards(String handCards, String baseCards) {
-        return isHigherCards(handCards, baseCards, false);
+    static boolean areHigherCards(String handCards, String baseCards) {
+        return areHigherCards(handCards, baseCards, false);
     }
 
-    static boolean isHigherCards(String handCards, String baseCards, boolean joker) {
+    static boolean areHigherCards(String handCards, String baseCards, boolean joker) {
         for (int i = 0; i < handCards.length(); i++) {
             char currHand = handCards.charAt(i);
             char currBase = baseCards.charAt(i);

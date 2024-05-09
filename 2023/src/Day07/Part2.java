@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import static Day07.Utils.getScoreCombo;
-import static Day07.Utils.isHigherCards;
+import static Day07.Utils.areHigherCards;
 
 public class Part2 {
 
@@ -35,7 +35,7 @@ public class Part2 {
                 ArrayList<String> orderedCards = ranks.get(scoreCombo);
                 boolean isplaced = false;
                 for (int i = 0; i < orderedCards.size(); i++) {
-                    if (isHigherCards(orderedCards.get(i), card,true)) {
+                    if (areHigherCards(orderedCards.get(i), card,true)) {
                         orderedCards.add(i, card);
                         isplaced = true;
                         break;
