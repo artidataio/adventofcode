@@ -79,14 +79,14 @@ public interface Utils {
     }
 
 
-    static int getScoreCombo(String card) {
-        return getScoreCombo(card, false);
+    static int getScoreCombo(String cards) {
+        return getScoreCombo(cards, false);
     }
 
-    static int getScoreCombo(String card, boolean joker) {
+    static int getScoreCombo(String cards, boolean joker) {
         Map<Character, Integer> countMap = new HashMap<>();
         for (int i = 0; i < 5; i++) {
-            char curr = card.charAt(i);
+            char curr = cards.charAt(i);
             countMap.put(curr, countMap.getOrDefault(curr, 0) + 1);
         }
 
