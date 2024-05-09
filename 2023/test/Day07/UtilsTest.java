@@ -1,54 +1,48 @@
 package Day07;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static Day07.Utils.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class UtilsTest {
 
-    @Test
-    void isHigherCardTest() {
-        assertTrue(isHigherCard('A','T'));
-        assertTrue(isHigherCard('Q','6'));
-        assertTrue(isHigherCard('9','5'));
-        assertTrue(isHigherCard('A','T', true));
-        assertTrue(isHigherCard('Q','6', true));
-        assertTrue(isHigherCard('9','5',true));
-        assertTrue(isHigherCard('2','J',true));
+    @ParameterizedTest(name = "handCard {0} is stronger than baseCard {1}")
+    @CsvSource({"A,T", "Q,6", "9,5"})
+    void isHigherCardTest(char handCard, char baseCard) {
+        assertTrue(isHigherCard(handCard, baseCard));
     }
 
-    @Test
-    void areHigherCardsTest() {
-        assertTrue(areHigherCards("QQQJA","T55J5"));
-        assertTrue(areHigherCards("KK677","KTJJT"));
-        assertTrue(areHigherCards("33332","2AAAA"));
-        assertTrue(areHigherCards("77888","77788"));
-        assertTrue(areHigherCards("QQQJA","T55J5",true));
-        assertTrue(areHigherCards("KK677","KTJJT", true));
-        assertTrue(areHigherCards("33332","2AAAA",true));
-        assertTrue(areHigherCards("77888","77788",true));
-        assertTrue(areHigherCards("QQQQ2","JKKK2",true));
+    @ParameterizedTest(name = "handCard {0} is stronger than baseCard {1}")
+    @CsvSource({"A,T", "Q,6", "9,5", "2,J"})
+    void isHigherCardJokerTest(char handCard, char baseCard) {
+        assertTrue(isHigherCard(handCard, baseCard, true));
     }
 
-    @Test
-    void getScoreComboTest() {
-        assertEquals(0,getScoreCombo("23456")); //HIGH CARD
-        assertEquals(1,getScoreCombo("A23A4")); //ONE PAIR
-        assertEquals(2,getScoreCombo("23432")); //TWO PAIR
-        assertEquals(3,getScoreCombo("TTT98")); //THREE KIND
-        assertEquals(4,getScoreCombo("23332")); //FULL HOUSE
-        assertEquals(5,getScoreCombo("AA8AA")); //FOUR KIND
-        assertEquals(6,getScoreCombo("AAAAA")); //FIVE KIND
-        assertEquals(0,getScoreCombo("23456",true)); //HIGH CARD
-        assertEquals(1,getScoreCombo("A23A4",true)); //ONE PAIR
-        assertEquals(2,getScoreCombo("23432",true)); //TWO PAIR
-        assertEquals(3,getScoreCombo("TTT98",true)); //THREE KIND
-        assertEquals(4,getScoreCombo("23332",true)); //FULL HOUSE
-        assertEquals(5,getScoreCombo("AA8AA",true)); //FOUR KIND
-        assertEquals(6,getScoreCombo("AAAAA",true)); //FIVE KIND
-        assertEquals(5,getScoreCombo("T55J5",true)); //FOUR KIND
-        assertEquals(5,getScoreCombo("QQQJA",true)); //FOUR KIND
-        assertEquals(5,getScoreCombo("KTJJT",true)); //FOUR KIND
+
+    @ParameterizedTest(name = "handCards {0} are stronger than baseCards {1}")
+    @CsvSource({"QQQJA,T55J5", "KK677,KTJJT", "33332,2AAAA", "77888,77788"})
+    void areHigherCardsTest(String handCards, String baseCards) {
+        assertTrue(areHigherCards(handCards, baseCards));
+    }
+
+    @ParameterizedTest(name = "handCards {0} are stronger than baseCards {1}")
+    @CsvSource({"QQQJA,T55J5", "KK677,KTJJT", "33332,2AAAA", "77888,77788", "3QQQ2,JKKK2"})
+    void areHigherCardsJokerTest(String handCards, String baseCards) {
+        assertTrue(areHigherCards(handCards, baseCards, true));
+    }
+
+    @ParameterizedTest(name = "scoreCombo {0} has a value of {1}")
+    @CsvSource({"0,23456", "1,A23A4", "2,23432", "3,TTT98", "4,23332", "5,AA8AA", "6,AAAAA"})
+    void getScoreComboTest(int value, String cards) {
+        assertEquals(value, getScoreCombo(cards));
+    }
+
+    @ParameterizedTest(name = "scoreCombo {1} has a value of {0}")
+    @CsvSource({"0,23456", "1,A23A4", "2,23432", "3,TTT98", "4,23332", "5,AA8AA", "6,AAAAA",
+            "5,T55J5", "5,QQQJA", "5,KTJJT"})
+    void getScoreComboJokerTest(int value, String cards) {
+        assertEquals(value, getScoreCombo(cards, true));
     }
 }
