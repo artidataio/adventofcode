@@ -20,7 +20,6 @@ class UtilsTest {
         assertTrue(isHigherCard(handCard, baseCard, true));
     }
 
-
     @ParameterizedTest(name = "handCards {0} are stronger than baseCards {1}")
     @CsvSource({"QQQJA,T55J5", "KK677,KTJJT", "33332,2AAAA", "77888,77788"})
     void areHigherCardsTest(String handCards, String baseCards) {
