@@ -45,33 +45,33 @@ public interface Utils {
     );
 
 
-    static boolean isHigherCard(char handCard, char baseCard) {
-        return isHigherCard(handCard, baseCard, false);
+    static boolean isCardStronger(char handCard, char baseCard) {
+        return isCardStronger(handCard, baseCard, false);
     }
 
-    static boolean isHigherCard(char handCard, char baseCard, boolean joker) {
+    static boolean isCardStronger(char handCard, char baseCard, boolean joker) {
         Map<Character, Integer> temp = joker ? scoresCardJoker : scoresCard;
         return temp.get(handCard) > temp.get(baseCard);
     }
 
-    static boolean isEqualCard(char handCard, char baseCard, boolean joker) {
+    static boolean isCardEqual(char handCard, char baseCard, boolean joker) {
         Map<Character, Integer> temp = joker ? scoresCardJoker : scoresCard;
         return Objects.equals(temp.get(handCard), temp.get(baseCard));
     }
 
 
     // This method doesn't consider scoreCombo
-    static boolean areHigherCards(String handCards, String baseCards) {
-        return areHigherCards(handCards, baseCards, false);
+    static boolean areCardsStronger(String handCards, String baseCards) {
+        return areCardsStronger(handCards, baseCards, false);
     }
 
-    static boolean areHigherCards(String handCards, String baseCards, boolean joker) {
+    static boolean areCardsStronger(String handCards, String baseCards, boolean joker) {
         for (int i = 0; i < handCards.length(); i++) {
             char currHand = handCards.charAt(i);
             char currBase = baseCards.charAt(i);
-            if (isHigherCard(currHand, currBase, joker)) {
+            if (isCardStronger(currHand, currBase, joker)) {
                 return true;
-            } else if (!isEqualCard(currHand, currBase, joker)) {
+            } else if (!isCardEqual(currHand, currBase, joker)) {
                 return false;
             }
         }

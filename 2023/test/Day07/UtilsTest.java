@@ -10,26 +10,26 @@ class UtilsTest {
 
     @ParameterizedTest(name = "handCard {0} is stronger than baseCard {1}")
     @CsvSource({"A,T", "Q,6", "9,5"})
-    void isHigherCardTest(char handCard, char baseCard) {
-        assertTrue(isHigherCard(handCard, baseCard));
+    void isCardStrongerTest(char handCard, char baseCard) {
+        assertTrue(isCardStronger(handCard, baseCard));
     }
 
     @ParameterizedTest(name = "handCard {0} is stronger than baseCard {1}")
     @CsvSource({"A,T", "Q,6", "9,5", "2,J"})
-    void isHigherCardJokerTest(char handCard, char baseCard) {
-        assertTrue(isHigherCard(handCard, baseCard, true));
+    void isCardStrongerJokerTest(char handCard, char baseCard) {
+        assertTrue(isCardStronger(handCard, baseCard, true));
     }
 
     @ParameterizedTest(name = "handCards {0} are stronger than baseCards {1}")
     @CsvSource({"QQQJA,T55J5", "KK677,KTJJT", "33332,2AAAA", "77888,77788"})
-    void areHigherCardsTest(String handCards, String baseCards) {
-        assertTrue(areHigherCards(handCards, baseCards));
+    void areCardsStrongerTest(String handCards, String baseCards) {
+        assertTrue(areCardsStronger(handCards, baseCards));
     }
 
     @ParameterizedTest(name = "handCards {0} are stronger than baseCards {1}")
     @CsvSource({"QQQJA,T55J5", "KK677,KTJJT", "33332,2AAAA", "77888,77788", "3QQQ2,JKKK2"})
-    void areHigherCardsJokerTest(String handCards, String baseCards) {
-        assertTrue(areHigherCards(handCards, baseCards, true));
+    void areCardsStrongerJokerTest(String handCards, String baseCards) {
+        assertTrue(areCardsStronger(handCards, baseCards, true));
     }
 
     @ParameterizedTest(name = "scoreCombo {0} has a value of {1}")
